@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_test/src/models/note.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:notes_app_flutter/src/models/note.dart';
 
 class CreateNote extends StatefulWidget {
   const CreateNote({super.key, required this.onNewNoteCreated});
@@ -13,7 +14,7 @@ class CreateNote extends StatefulWidget {
 class _CreateNoteState extends State<CreateNote> {
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
-
+  String imageUrl = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +25,18 @@ class _CreateNoteState extends State<CreateNote> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            IconButton(
+                onPressed: () async {
+                  ImagePicker imagePicker = ImagePicker();
+                  XFile? file =
+                      await imagePicker.pickImage(source: ImageSource.camera);
+                  if (file == null) return;
+                  String uniqueFileName =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  // Reference
+                  try {} catch (error) {}
+                },
+                icon: const Icon(Icons.camera_alt_outlined)),
             TextFormField(
               controller: titleController,
               style: const TextStyle(fontSize: 28),
